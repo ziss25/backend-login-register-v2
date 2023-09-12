@@ -145,7 +145,7 @@ export const updateProfileAvatar = async (req, res) => {
 
     // Kirim gambar ke Imgbb
     const imgbbResponse = await uploadImage(imageFile);
-    const { title, url } = imgbbResponse.data.data.title;
+    const { title, url } = imgbbResponse.data.data;
     await Users.update(
       { avatar_image: title, avatar_url: url },
       {
@@ -154,7 +154,8 @@ export const updateProfileAvatar = async (req, res) => {
         },
       }
     );
-    res.json({ msg: 'image berhasil di upload', url });
+    res.json({ msg: 'image berhasil di upload', url: url });
+    console.log(url);
   } catch (error) {
     console.error('Gagal mengunggah gambar ke Imgbb:', error.message);
   }
