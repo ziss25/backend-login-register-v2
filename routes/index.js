@@ -5,7 +5,7 @@ import {
   Login,
   Logout,
   updateProfileAvatar,
-  updateUsername,
+  updatename,
 } from '../controller/Users.js';
 import { verifyToken } from '../middleware/VerifyToken.js';
 import { refreshToken } from '../controller/refreshToken.js';
