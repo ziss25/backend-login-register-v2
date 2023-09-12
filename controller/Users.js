@@ -51,7 +51,7 @@ export const Login = async (req, res) => {
   try {
     const user = await Users.findAll({
       where: {
-        email: req.body.email,
+        username: req.body.username,
       },
     });
     const match = await bcrypt.compare(req.body.password, user[0].password);
