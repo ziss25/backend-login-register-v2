@@ -27,7 +27,7 @@ export const getUser = async (req, res) => {
 };
 
 export const Register = async (req, res) => {
-  const { name, email, password, confPassword, role, avatar_image, avatar_url } = req.body;
+  const { name, username, password, confPassword, role, avatar_image, avatar_url } = req.body;
   if (password !== confPassword) return res.status(400).json({ msg: 'password dan confirmPassword tidak cocok' });
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
@@ -35,7 +35,7 @@ export const Register = async (req, res) => {
   try {
     await Users.create({
       name,
-      email,
+      username,
       role,
       avatar_image,
       avatar_url,
@@ -58,7 +58,7 @@ export const Login = async (req, res) => {
     if (!match) return res.status(400).json({ msg: 'wrong password' });
     const userId = user[0].id;
     const name = user[0].name;
-    const email = user[0].email;
+    const username = user[0].username;
     const role = user[0].role;
     const avatar_image = user[0].avatar_image;
     const avatar_url = user[0].avatar_url;
@@ -67,7 +67,7 @@ export const Login = async (req, res) => {
       {
         userId,
         name,
-        email, //
+        username, //
         role,
         avatar_image,
         avatar_url,
@@ -81,7 +81,7 @@ export const Login = async (req, res) => {
       {
         userId,
         name, //
-        email,
+        username,
         role,
         avatar_image,
         avatar_url,
@@ -105,7 +105,7 @@ export const Login = async (req, res) => {
     });
     res.json({ accessToken });
   } catch (error) {
-    res.status(404).json({ msg: 'email tidak ditemukan' });
+    res.status(404).json({ msg: 'username tidak ditemukan' });
   }
 };
 
@@ -161,7 +161,7 @@ export const updateProfileAvatar = async (req, res) => {
   }
 };
 
-export const updateUsername = async (req, res) => {
+export const updatename = async (req, res) => {
   const user = await Users.findOne({
     where: {
       id: req.params.id,

@@ -18,6 +18,6 @@ router.post('/login', Login);
 router.get('/token', refreshToken);
 router.delete('/logout', Logout);
 router.patch('/users/avatar/:id', updateProfileAvatar);
-router.patch('/users/username/:id', updateUsername);
+router.patch('/users/username/:id', updatename);
 
 export default router;
