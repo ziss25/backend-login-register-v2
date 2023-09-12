@@ -146,7 +146,7 @@ export const updateProfileAvatar = async (req, res) => {
     // Kirim gambar ke Imgbb
     const imgbbResponse = await uploadImage(imageFile);
     const { title, url } = imgbbResponse.data.data.title;
-    res.json({ msg: 'image berhasil di upload' });
+    res.json({ msg: 'image berhasil di upload', url });
     await Users.update(
       { avatar_image: title, avatar_url: url },
       {
