@@ -100,7 +100,7 @@ export const Login = async (req, res) => {
       }
     );
     res.cookie('refreshToken', refreshToken, {
-      domain: 'localhost:5173',
+      domain: 'https://jittery-wasp-undershirt.cyclic.cloud',
       path: '/',
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
