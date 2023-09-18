@@ -101,8 +101,7 @@ export const Login = async (req, res) => {
     );
     res.cookie('refreshToken', refreshToken, {
       domain: 'localhost:5173',
-      path: '/', // Anda dapat menyesuaikan path sesuai kebutuhan
-      secure: true, // Jika Anda menggunakan HTTPS di localhost
+      path: '/',
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
