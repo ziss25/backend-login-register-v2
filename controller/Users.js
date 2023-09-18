@@ -103,7 +103,7 @@ export const Login = async (req, res) => {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
       // secure: true,
-      // sameSite: 'None', // Mengizinkan cookie lintas situs
+      sameSite: 'Lax', // Mengizinkan cookie lintas situs
     });
     res.json({ accessToken });
   } catch (error) {
