@@ -24,12 +24,8 @@ app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(FileUpload());
-app.use(express.static('public'));
-
 app.use(router);
 
 app.listen(5000, () => {
   console.log('server at running');
 });
-
-// backend udah selesai
