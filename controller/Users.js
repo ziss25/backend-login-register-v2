@@ -169,7 +169,6 @@ export const updatename = async (req, res) => {
       id: req.params.id,
     },
   });
-
   const newName = req.body.newname;
   try {
     await Users.update(
