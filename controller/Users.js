@@ -18,7 +18,7 @@ const uploadImage = (img) => {
 export const getUser = async (req, res) => {
   try {
     const users = await Users.findAll({
-      attributes: ['id', 'name', 'email', 'role', 'avatar_url'],
+      attributes: ['id', 'name', 'email', 'role', 'avatar_url', 'description'],
     });
     res.json(users);
   } catch (error) {
@@ -27,7 +27,7 @@ export const getUser = async (req, res) => {
 };
 
 export const Register = async (req, res) => {
-  const { name, username, password, confPassword, role, avatar_image, avatar_url } = req.body;
+  const { name, username, password, confPassword, role, avatar_image, avatar_url, description } = req.body;
   if (password !== confPassword) return res.status(400).json({ msg: 'password dan confirmPassword tidak cocok' });
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
@@ -62,6 +62,7 @@ export const Login = async (req, res) => {
     const role = user[0].role;
     const avatar_image = user[0].avatar_image;
     const avatar_url = user[0].avatar_url;
+    const description = user[0].description;
     console.log(avatar_image);
     const accessToken = jwt.sign(
       {
@@ -71,6 +72,7 @@ export const Login = async (req, res) => {
         role,
         avatar_image,
         avatar_url,
+        description,
       },
       process.env.ACCESS_TOKEN_SECRET,
       {
@@ -85,6 +87,7 @@ export const Login = async (req, res) => {
         role,
         avatar_image,
         avatar_url,
+        description,
       },
       process.env.REFRESH_TOKEN_SECRET,
       {
@@ -180,6 +183,23 @@ export const updatename = async (req, res) => {
       }
     );
     res.status(200).json({ msg: 'username success update' });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const updateDescription = async (req, res) => {
+  const description = req.body.description;
+  try {
+    await Users.update(
+      { description: description },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    res.status(200).json({ msg: 'description success updated' });
   } catch (error) {
     console.log(error.message);
   }

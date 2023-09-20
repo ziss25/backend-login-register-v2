@@ -18,6 +18,9 @@ const Users = db.define(
     role: {
       type: DataTypes.STRING,
     },
+    description: {
+      type: DataTypes.STRING,
+    },
     avatar_image: DataTypes.STRING,
     avatar_url: DataTypes.STRING,
     refresh_token: {
