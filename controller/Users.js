@@ -18,11 +18,11 @@ const uploadImage = (img) => {
 export const getUser = async (req, res) => {
   try {
     const users = await Users.findAll({
-      attributes: ['id', 'name', 'email', 'role', 'avatar_url', 'description'],
+      attributes: ['id', 'name', 'username', 'role', 'avatar_url', 'description'],
     });
     res.json(users);
-  } catch (error) {
-    console.log(erorr);
+  } catch (err) {
+    console.log(err);
   }
 };
 
